@@ -1,0 +1,8 @@
+runtime: python39
+entrypoint: gunicorn -b :$PORT main:app
+
+service: naked-domain-redirector
+
+handlers:
+- url: /.*
+  script: auto

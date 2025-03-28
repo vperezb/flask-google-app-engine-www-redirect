@@ -1,0 +1,5 @@
+dispatch:
+  - url: "www.example.com/*"
+    service: default
+  - url: "example.com/*"
+    service: naked-domain-redirector

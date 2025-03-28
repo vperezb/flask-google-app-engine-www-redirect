@@ -1,27 +1,31 @@
-# Flask Google App Engine WWW Redirect
+# **Flask Google App Engine WWW Redirect**  
 
-This Flask application allows you to create a service to redirect traffic from your naked domain (e.g., `example.com`) to your `www.` subdomain (e.g., `www.example.com`) using Google App Engine.
+This Flask application redirects traffic from your **naked domain** (e.g., `example.com`) to the `www.` subdomain (e.g., `www.example.com`) using **Google App Engine (GAE)**.  
 
-## Features
-- Redirects all naked domain traffic to the `www.` subdomain.
-- Uses a 301 permanent redirect for SEO-friendly redirection.
+## **Features**  
+✅ Redirects all traffic from `example.com` to `www.example.com`.  
+✅ Uses **301 permanent redirects** for SEO benefits.  
+✅ Lightweight and easy to deploy on **Google App Engine**.  
 
-## Prerequisites
-1. A Google Cloud Platform (GCP) project.
-2. The [Google Cloud SDK](https://cloud.google.com/sdk/docs/install) installed on your local machine.
-3. A custom domain configured in your GCP project.
-4. Your app is deployed in `default` service.
+## **Prerequisites**  
+Before deploying, ensure you have:  
+1. A **Google Cloud Platform (GCP)** project.  
+2. The [Google Cloud SDK](https://cloud.google.com/sdk/docs/install) installed on your machine.  
+3. A **custom domain** configured in your GCP project.  
+4. Your app deployed in the `default` service.  
 
-## Setup Instructions
+## **Setup Instructions**  
 
-### 1. Clone the Repository
-Clone this repository to your local machine:
+### **1. Clone the Repository**  
+Download the repository and navigate to the project folder:  
+
 ```bash
 git clone https://github.com/your-repo/flask-google-app-engine-www-redirect.git
 cd flask-google-app-engine-www-redirect
 ```
 
-### 2. Customize the dispatch.yaml to use your domain
+### **2. Configure `dispatch.yaml`**  
+Modify the `dispatch.yaml` file to match your domain:  
 
 ```yaml
 dispatch:
@@ -30,26 +34,30 @@ dispatch:
   - url: "example.com/*"
     service: naked-domain-redirector
 ```
-You just need to update to match your domain.
 
-### 3. Deploy the application in the same project
+> **Note:** The `default` service should handle requests for `www.example.com`, while the `naked-domain-redirector` service will process requests for the bare domain (`example.com`) and redirect them.
 
-Make sure you have selected the project you want to deploy in and just deploy this tiny application.
+### **3. Deploy the Application**  
+Ensure you are working within the correct GCP project, then deploy the Flask app:  
 
 ```bash
 gcloud app deploy app.yaml
 ```
 
-### 4. Deploy the dispatch functions
+### **4. Deploy `dispatch.yaml`**  
+Deploy the dispatch routing configuration:  
 
 ```bash
 gcloud app deploy dispatch.yaml
 ```
 
-### 5. That's it, now if you navigate to your "non-www" version it will redirect to www
+### **5. Verify the Redirection**  
+Now, if you navigate to your **naked domain** (`example.com`), it should redirect to `www.example.com`.  
 
-Below is an example of how the configuration might look:
+### **Example Configuration**  
+Here’s an example of how the setup should look:  
 
-![Example Configuration](https://lh3.googleusercontent.com/BV827-7Wf0MOS4HuftQjQ9xfBLwFSxwuCgFIFaTXlORU2wE4obNnrXSgGaAH9edk4hmGrlgjEqMVpltiGuzpUGRJlA=s1600-w1600-h1000)
+![Example Configuration](https://lh3.googleusercontent.com/BV827-7Wf0MOS4HuftQjQ9xfBLwFSxwuCgFIFaTXlORU2wE4obNnrXSgGaAH9edk4hmGrlgjEqMVpltiGuzpUGRJlA=s1600-w1600-h1000)  
 
-I've used this extension to check: https://chromewebstore.google.com/detail/aomidfkchockcldhbkggjokdkkebmdll?utm_source=item-share-cb
+To test if the redirection is working, you can use this Chrome extension:  
+🔗 [Redirect Path](https://chromewebstore.google.com/detail/aomidfkchockcldhbkggjokdkkebmdll?utm_source=item-share-cb)  
